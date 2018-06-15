@@ -1,0 +1,33 @@
+<div class="todo-content">
+    <h1> Message Board</h1>
+    <div>
+        <form #messageForm="ngForm" (ngSubmit)="createMessage(msgForm)" novalidate>
+                <input type="text" id="msgContent" class="form-control" placeholder="Type a message and press enter..." 
+                required
+                name="msgContent" [(ngModel)]="newmessage.msgContent"
+                #msgContent="ngModel" >
+                <div *ngIf="msgContent.errors && msgContent.dirty"
+             class="alert alert-danger">
+            <div [hidden]="!msgContent.errors.required">
+              Message content is required.
+            </div>
+        </div>
+        </form>
+    </div>
+
+    <ul class="message-list">
+            <li *ngFor="let message of messages">
+              <div class="todo-row">
+                  <span class="todo-title">
+                    {{message.msgContent}}
+                  </span>
+                  <span class="todo-actions">
+                        <a (click)="deleteMessage(message.id)">
+                          <i class="material-icons delete">clear</i>
+                        </a>
+                    </span>
+              </div>
+              </li>
+    </ul>
+    
+</div>
